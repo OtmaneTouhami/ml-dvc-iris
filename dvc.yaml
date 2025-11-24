@@ -1,0 +1,27 @@
+stages:
+  prepare:
+    cmd: uv run scripts/preprocess.py
+    deps:
+      - scripts/preprocess.py
+      - data/iris.csv
+    outs:
+      - data/iris_preprocessed.csv
+
+  train:
+    cmd: uv run src/train.py
+    deps:
+      - src/train.py
+      - data/iris_preprocessed.csv
+      - params.yaml
+    outs:
+      - models/random_forest.pkl
+      - metrics/train_metrics.json
+
+  evaluate:
+    cmd: uv run src/evaluate.py
+    deps:
+      - src/evaluate.py
+      - models/random_forest.pkl
+      - data/iris_preprocessed.csv
+    outs:
+      - metrics/eval_metrics.json
