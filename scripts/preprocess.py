@@ -4,7 +4,7 @@ import pandas as pd
 from sklearn.preprocessing import StandardScaler
 
 
-def preprocess():
+def main():
     data_dir = Path("data")
     raw_path = data_dir / "iris.csv"
     prep_path = data_dir / "iris_preprocessed.csv"
@@ -30,3 +30,6 @@ def preprocess():
     df_scaled.to_csv(prep_path, index=False)
     print(f"Dataset prétraité sauvegardé dans {prep_path}")
 
+
+if __name__ == "__main__":
+    main()
