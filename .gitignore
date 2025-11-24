@@ -6,3 +6,4 @@ models/
 metrics/
 reports/
 dvc_storage/
+pdf/
