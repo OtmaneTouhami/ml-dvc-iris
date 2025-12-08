@@ -1,0 +1,41 @@
+name: MLOps Pipeline
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Setup CML
+        uses: iterative/setup-cml@v1
+
+      - name: Install dependencies
+        run: |
+          pip install uv
+          uv sync
+
+      - name: Download Data
+        run: uv run scripts/download_iris.py
+
+      - name: Run DVC Pipeline
+        run: uv run dvc repro
+
+      - name: Generate Report
+        run: uv run scripts/generate_cml_report.py
+
+      - name: Publish CML Report
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cml comment create reports/cml_report.md
