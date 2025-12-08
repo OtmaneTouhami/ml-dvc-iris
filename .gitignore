@@ -7,3 +7,5 @@ metrics/
 reports/
 dvc_storage/
 pdf/
+
+.dvc/gdrive-creds.json
