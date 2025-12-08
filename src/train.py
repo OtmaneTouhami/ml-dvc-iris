@@ -23,6 +23,7 @@ def main():
     data_path = Path(paths["data"])
     model_path = Path(paths["model"])
     metrics_path = Path(paths["metrics_train"])
+    feature_imp_path = Path(paths["metrics_feature_importances"])
 
     model_path.parent.mkdir(parents=True, exist_ok=True)
     metrics_path.parent.mkdir(parents=True, exist_ok=True)
@@ -69,8 +70,21 @@ def main():
     with open(metrics_path, "w") as f:
         json.dump(metrics, f, indent=4)
 
+    # 7. Sauvegarde des feature importances
+    importances = clf.feature_importances_
+    feature_names = X.columns
+    feature_imp = {
+        name: float(imp) for name, imp in zip(feature_names, importances)
+    }
+    # Trier par importance décroissante
+    feature_imp = dict(sorted(feature_imp.items(), key=lambda item: item[1], reverse=True))
+    
+    with open(feature_imp_path, "w") as f:
+        json.dump(feature_imp, f, indent=4)
+
     print(f"Modèle entraîné sauvegardé dans: {model_path}")
     print(f"Métriques d'entraînement sauvegardées dans: {metrics_path}")
+    print(f"Feature importances sauvegardées dans: {feature_imp_path}")
     print(f"Accuracy (test): {acc:.4f}")
 
 

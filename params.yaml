@@ -10,3 +10,5 @@ paths:
   model: "models/random_forest.pkl"
   metrics_train: "metrics/train_metrics.json"
   metrics_eval: "metrics/eval_metrics.json"
+  metrics_feature_importances: "metrics/feature_importances.json"
+  metrics_class: "metrics/class_metrics.json"

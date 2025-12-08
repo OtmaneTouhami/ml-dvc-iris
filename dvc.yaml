@@ -16,6 +16,7 @@ stages:
     outs:
       - models/random_forest.pkl
       - metrics/train_metrics.json
+      - metrics/feature_importances.json
 
   evaluate:
     cmd: uv run src/evaluate.py
@@ -25,3 +26,4 @@ stages:
       - data/iris_preprocessed.csv
     outs:
       - metrics/eval_metrics.json
+      - metrics/class_metrics.json

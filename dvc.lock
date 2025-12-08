@@ -25,13 +25,17 @@ stages:
       size: 12137
     - path: params.yaml
       hash: md5
-      md5: 1031a60a0d1226d53da1a0c6ddd3e12b
-      size: 272
+      md5: 1def7b29a17a63108fd18e080f26cee1
+      size: 384
     - path: src/train.py
       hash: md5
-      md5: 7418df344d6c7dc6a13fdf2145868cad
-      size: 2160
+      md5: da7c341ec70461e3a1357d4c61d810bf
+      size: 2742
     outs:
+    - path: metrics/feature_importances.json
+      hash: md5
+      md5: 39f8c84f232b26dfc59e761aafc662d6
+      size: 184
     - path: metrics/train_metrics.json
       hash: md5
       md5: 12e33c286809a85b4553b31d56ebf89f
@@ -53,9 +57,13 @@ stages:
       size: 325905
     - path: src/evaluate.py
       hash: md5
-      md5: cbafa7fc89d8c5b2c38046972574ea1e
-      size: 1389
+      md5: fdff45da3ceb8d0e5e69d37987117edf
+      size: 1679
     outs:
+    - path: metrics/class_metrics.json
+      hash: md5
+      md5: 74b75471ebee0c2501bfcd76a2057612
+      size: 735
     - path: metrics/eval_metrics.json
       hash: md5
       md5: 1c3effbf00d7ea9ba766fe952a75dccb

@@ -21,6 +21,7 @@ def main():
     data_path = Path(paths["data"])
     model_path = Path(paths["model"])
     metrics_eval_path = Path(paths["metrics_eval"])
+    metrics_class_path = Path(paths["metrics_class"])
 
     metrics_eval_path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -38,6 +39,7 @@ def main():
     y_pred = clf.predict(X)
     acc_full = accuracy_score(y, y_pred)
     report_str = classification_report(y, y_pred)
+    report_dict = classification_report(y, y_pred, output_dict=True)
 
     metrics_eval = {
         "accuracy_full_data": float(acc_full),
@@ -47,7 +49,11 @@ def main():
     with open(metrics_eval_path, "w") as f:
         json.dump(metrics_eval, f, indent=4)
 
+    with open(metrics_class_path, "w") as f:
+        json.dump(report_dict, f, indent=4)
+
     print(f"Métriques d'évaluation sauvegardées dans: {metrics_eval_path}")
+    print(f"Métriques par classe sauvegardées dans: {metrics_class_path}")
     print(f"Accuracy (données complètes): {acc_full:.4f}")
 
 
