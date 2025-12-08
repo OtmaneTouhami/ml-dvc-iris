@@ -27,3 +27,13 @@ stages:
     outs:
       - metrics/eval_metrics.json
       - metrics/class_metrics.json
+
+  deploy:
+    cmd: uv run scripts/deploy.py
+    deps:
+      - scripts/deploy.py
+      - models/random_forest.pkl
+      - metrics/eval_metrics.json
+    outs:
+      - models/production_model.pkl
+      - metrics/best_metrics.json
